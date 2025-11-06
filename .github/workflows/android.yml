@@ -1,0 +1,28 @@
+name: Android CI
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: android-actions/setup-android@v3
+      - name: Accept licenses & install tools
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platforms;android-33" "build-tools;33.0.1"
+      - name: Grant Gradle execute permission
+        run: chmod +x ./gradlew
+      - name: Build Release
+        run: ./gradlew --no-daemon clean assembleRelease
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: "**/build/outputs/apk/release/*.apk"
