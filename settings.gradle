@@ -4,14 +4,13 @@ include(":app")
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
   repositories {
-    // Resolve Xposed API ONLY from api.xposed.info
-    exclusiveContent {
-      forRepository(maven {
-        url = uri("https://api.xposed.info/")
-        metadataSources { mavenPom(); artifact() }
-      })
-      filter { includeGroup("de.robv.android.xposed") }
+    // First: Xposed repo, restricted to its group only
+    maven {
+      url = uri("https://api.xposed.info/")
+      content { includeGroup("de.robv.android.xposed") }
+      metadataSources { mavenPom(); artifact() }
     }
+    // Then the usual repos
     google()
     mavenCentral()
     maven("https://jitpack.io")

@@ -2,8 +2,8 @@ package xyz.vicky.udfps.ext;
 
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookZygoteInit;
-import android.content.res.XModuleResources;
-import android.content.res.XResources;
+import de.robv.android.xposed.XModuleResources;
+import de.robv.android.xposed.XResources;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 
