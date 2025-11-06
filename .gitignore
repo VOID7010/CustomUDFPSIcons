@@ -1,0 +1,11 @@
+# Gradle caches & builds
+.gradle/
+**/build/
+# IDE
+.idea/
+*.iml
+# Local SDK / props
+local.properties
+# Do NOT commit downloaded Gradle distributions/zips
+gradle-*/
+*.zip
