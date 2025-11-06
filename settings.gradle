@@ -2,15 +2,18 @@ rootProject.name = "CustomUDFPSIcons"
 include(":app")
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-    repositories {
-        google()
-        mavenCentral()
-        maven {
-            url = uri("https://api.xposed.info/")
-            content { includeGroup("de.robv.android.xposed") }
-            metadataSources { mavenPom(); artifact() }
-        }
-        maven { url = uri("https://jitpack.io") }
+  repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+  repositories {
+    // Resolve Xposed API ONLY from api.xposed.info
+    exclusiveContent {
+      forRepository(maven {
+        url = uri("https://api.xposed.info/")
+        metadataSources { mavenPom(); artifact() }
+      })
+      filter { includeGroup("de.robv.android.xposed") }
     }
+    google()
+    mavenCentral()
+    maven("https://jitpack.io")
+  }
 }
